@@ -3,6 +3,832 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apurba Debnath- Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #1167b2;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .portfolio-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            background: #055ed2;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 255, 255, 0.03) 10px,
+                    rgba(255, 255, 255, 0.03) 20px);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 20px;
+            background: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+        }
+
+        .upload-text:hover {
+            color: white;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .title {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f8f8;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .nav-tab {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            color: #333;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-tab.active {
+            background: #333;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .nav-tab:hover {
+            background: #e8e8e8;
+        }
+
+        .content-section {
+            padding: 40px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #666;
+        }
+
+        .research-item,
+        .publication-item,
+        .education-item {
+            background: #f9f9f9;
+            border-left: 4px solid #333;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+            border: 1px solid #e8e8e8;
+        }
+
+        .research-item:hover,
+        .publication-item:hover,
+        .education-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+            border-left-color: #666;
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            color: #2c2c2c;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .item-meta {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .skill-category h3 {
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: #333;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            background: #555;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .contact-item:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .awards-list {
+            list-style: none;
+        }
+
+        .awards-list li {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #333;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .awards-list li:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+            border-left-color: #666;
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="portfolio-card">
+            <div class="header">
+                <div class="profile-img" onclick="document.getElementById('imageInput').click();" id="profileImage">
+                    <span id="initials">SJ</span>
+                </div>
+                <input type="file" id="imageInput" accept="image/*" onchange="loadImage(event)">
+                <div class="upload-text" onclick="document.getElementById('imageInput').click();">
+                    Click to upload your photo
+                </div>
+                <h1 id="nameTitle">Apurba Debnath</h1>
+                <!-- <p class="title">Associate Professor of Computer Science</p>
+                <p class="title">Artificial Intelligence & Machine Learning Research</p> -->
+            </div>
+
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showSection('about')">About</button>
+                <button class="nav-tab" onclick="showSection('research')">Research</button>
+                <!-- <button class="nav-tab" onclick="showSection('publications')">Publications</button> -->
+                <button class="nav-tab" onclick="showSection('education')">Education</button>
+                <!-- <button class="nav-tab" onclick="showSection('skills')">Skills</button> -->
+                <button class="nav-tab" onclick="showSection('awards')">Awards</button>
+                <button class="nav-tab" onclick="showSection('contact')">Contact</button>
+            </div>
+
+            <div id="about" class="content-section active">
+                <h2 class="section-title">About Me</h2>
+                <p class="bio-text">
+                    I am a Masters student at University of California San Francisco (UCSF), speclializing in Biomedical
+                    Imaging technologies. Before that, I worked as a Post-Baccalaureate researcher at IIT Madars, India
+                    in the field of computational Neuroscience in BCI to understand the underlying neural mechanisms of
+                    BCI control. Subsequently as a Visting Summer researcher at Paris Brain Institute I worked in
+                    formulating interpretable deep learning tools for BCI application, there I implemented spatial
+                    filtering method to better classify the left and right motor imagery task.
+                </p>
+                <br>
+                <p class="bio-text">
+                    I hold my Bachelor's degree in Biotechnology from National Institute of Technology Durgapur, India.
+                    There, as an undergraduate researcher I worked in Drug Delivery systems.
+                </p>
+                <br>
+                <p class="bio-text">
+                    Beyond research, I am actively involved in the academic community, serving as a reviewer for major
+                    conferences like NeurIPS,
+                    ICML, and ICLR, and as an associate editor for the Journal of Machine Learning Research.
+                </p>
+            </div>
+
+            <div id="research" class="content-section">
+                <h2 class="section-title">Research Experience</h2>
+
+                <div class="research-entry">
+                    <div class="timeline">MAY 2025 – AUG 2025</div>
+                    <div class="research-item">
+                        <h3 class="item-title">Paris Brain Institute - ICM, Paris, France</h3>
+                        <p class="item-meta">Visiting Summer Researcher, Inria NERV Lab</p>
+                        <p class="item-meta">Advised by: Dr. Marie-Constance Corsi</p>
+                        <p>Developing privacy-preserving machine learning algorithms for medical data analysis across
+                            multiple hospitals without centralizing sensitive patient information. This research
+                            addresses
+                            critical challenges in healthcare AI while maintaining HIPAA compliance.</p>
+                    </div>
+                </div>
+
+                <div class="research-entry">
+                    <div class="timeline">JUL 2024 – JUL 2025</div>
+                    <div class="research-item">
+                        <h3 class="item-title">Indian Institute of Technology Madras, Chennai, India</h3>
+                        <p class="item-meta">Post-Baccalaureate Researcher, Centre for Integrative Biology and Systems
+                            Medicine (IBSE), IIT Madras</p>
+                        <p class="item-meta">Advised by: Dr. Parul Verma (IIT Madras) & Dr. Marie-Constance Corsi (Paris
+                            Brain Institute)</p>
+                        <p>Creating interpretable machine learning models for financial risk assessment and fraud
+                            detection.
+                            The goal is to develop AI systems that can provide clear explanations for their decisions to
+                            meet regulatory requirements in the financial sector.</p>
+                    </div>
+                </div>
+
+                <div class="research-entry">
+                    <div class="timeline">AUG 2023 – MAY 2024</div>
+                    <div class="research-item">
+                        <h3 class="item-title">National Institute of Technology Durgapur, India</h3>
+                        <p class="item-meta">Undergraduate Researcher, Department of Biotechnology</p>
+                        <p class="item-meta">Advised by: Prof. Dalia Dasgupta Mandal</p>
+                        <p>Investigating automated neural network design techniques optimized for resource-constrained
+                            edge
+                            devices. This research aims to democratize AI deployment on IoT devices and mobile
+                            platforms.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="publications" class="content-section">
+                <h2 class="section-title">Selected Publications</h2>
+
+                <div class="publication-item">
+                    <h3 class="item-title">Privacy-Preserving Deep Learning in Distributed Healthcare Systems</h3>
+                    <p class="item-meta">Nature Machine Intelligence, 2024 | Cited 127 times</p>
+                    <p>Johnson, S., Martinez, A., Chen, L., et al. This paper introduces a novel federated learning
+                        framework
+                        that maintains differential privacy while achieving state-of-the-art performance on medical
+                        imaging tasks.</p>
+                </div>
+
+                <div class="publication-item">
+                    <h3 class="item-title">Adaptive Neural Architecture Search with Reinforcement Learning</h3>
+                    <p class="item-meta">Proceedings of ICML 2023 | Cited 89 times</p>
+                    <p>Johnson, S., Wang, K., Thompson, R. We propose ANAS-RL, a reinforcement learning approach to
+                        automatically design neural network architectures that adapt to different computational
+                        constraints.</p>
+                </div>
+
+                <div class="publication-item">
+                    <h3 class="item-title">Interpretable Machine Learning for Financial Risk Assessment</h3>
+                    <p class="item-meta">ACM Transactions on Intelligent Systems, 2023 | Cited 156 times</p>
+                    <p>Johnson, S., Rodriguez, M., Kim, J. This work presents LIME-Finance, an extension of LIME
+                        specifically designed for explaining machine learning decisions in financial applications.</p>
+                </div>
+
+                <div class="publication-item">
+                    <h3 class="item-title">Efficient Training of Large Language Models on Edge Devices</h3>
+                    <p class="item-meta">NeurIPS 2022 | Cited 203 times</p>
+                    <p>Chen, L., Johnson, S., Davis, P., et al. We introduce EdgeLLM, a training framework that enables
+                        fine-tuning of large language models on resource-constrained edge devices through novel
+                        optimization techniques.</p>
+                </div>
+            </div>
+
+            <div id="education" class="content-section">
+                <h2 class="section-title">Education</h2>
+
+                <!-- <div class="education-item">
+                    <h3 class="item-title">Ph.D. in Computer Science</h3>
+                    <p class="item-meta">Stanford University | 2010-2015</p>
+                    <p>Dissertation: "Scalable Machine Learning Algorithms for Big Data Analytics"<br>
+                        Advisor: Prof. Andrew Ng<br>
+                        GPA: 3.9/4.0</p>
+                </div> -->
+
+                <div class="education-item">
+                    <h3 class="item-title">University of California, San Francisco</h3>
+                    <p class="item-meta">M.S. in Biomedical Imaging | 2025-2026</p>
+                    <!-- <p>Concentration: Artificial Intelligence<br> -->
+                    Thesis: "Distributed Learning Algorithms for Sensor Networks"<br>
+                    GPA: 4.0/4.0</p>
+                </div>
+
+                <div class="education-item">
+                    <h3 class="item-title">National Institute of Technology Durgapur, India</h3>
+                    <p class="item-meta">Bachelor of Technology in Biotechnology | 2020-2024</p>
+                    <!-- <p>Magna Cum Laude, Phi Beta Kappa<br> -->
+                    Thesis: "Machine Learning based approach for the design and release kinetics prediction of the
+                    PLGA-based Drug Delivery Systems"<br>
+                    Supervisor: Prof. Dalia Dasgupta Mandal<br>
+                    GPA: 3.31/4.00, Major GPA: 3.78/4.00, CS GPA: 3.93/4.00</p>
+                    <p class="item-meta">Course work:<br>
+                        <item><b>Biotechnology:</b> Cell Biology and Genetics, Molecular Biology and rDNA Technology,
+                            Biochemistry and
+                            Enzyme Technology, Human Genomics, Bioinformatics, Cancer Biology and Cell Signaling.</item>
+                        </br>
+                        <item><b>Computer Science:</b> Introduction to Computing, Programming and Data Structures,
+                            Compiler Design, Database Management Systems</item></br>
+                        <item><b>Mathematics:</b> Linear Algebra, Calculus, ODE, PDE, Probability.</item>
+                    </p>
+                </div>
+
+                <!-- <div class="education-item">
+                    <h3 class="item-title">Associate Professor</h3>
+                    <p class="item-meta">University of Excellence | 2020-Present</p>
+                    <p>Leading research in AI/ML, teaching graduate and undergraduate courses,
+                        supervising PhD students, and serving on university committees.</p>
+                </div>
+
+                <div class="education-item">
+                    <h3 class="item-title">Assistant Professor</h3>
+                    <p class="item-meta">University of Excellence | 2015-2020</p>
+                    <p>Established research lab, secured $4.2M in funding, published 25+ papers
+                        in top venues, and received tenure.</p>
+                </div> -->
+            </div>
+
+            <div id="skills" class="content-section">
+                <h2 class="section-title">Technical Skills & Expertise</h2>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">R</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Machine Learning</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">Keras</span>
+                            <span class="skill-tag">XGBoost</span>
+                            <span class="skill-tag">Hugging Face</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Research Areas</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">Computer Vision</span>
+                            <span class="skill-tag">Federated Learning</span>
+                            <span class="skill-tag">Explainable AI</span>
+                            <span class="skill-tag">Neural Architecture Search</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Tools & Platforms</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Jupyter</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="awards" class="content-section">
+                <h2 class="section-title">Awards & Honors</h2>
+
+                <ul class="awards-list">
+                    <li><strong>IBSE Post-Baccalaureate Fellowship ($6000 in total)</strong> 2024-2025<br>
+                        "To pursue research in the filed of Computational Neuroscience to elucidate the underlying
+                        neural mechanisms of Brain-Computer Interface"</li>
+
+                    <li><strong>Paris Brain Institute Travel Award for OHBM 2025, Brisbane</strong> 2025<br>
+                        "To present my research work as poster presentaion at OHBM 2025 Annual Meeting in Brisbane,
+                        Australia"</li>
+
+                    <li><strong>IBSE Travel Award for Physics of Cells & Tissues 3.0 Symposium, IISc</strong> 2025<br>
+                        "To present my research work as poster presentaion at Indian Institute of Science (IISc)
+                        Bengaluru, India"</li>
+
+                    <li><strong>NEC State Merit Scholarship to pursue Bachelor’s degree ($1140 in total)</strong> 2020 -
+                        2024<br>
+                        Recognized for outstanding high school score in Science stream to pursure Bachelor's degree
+                    </li>
+
+                    <li><strong>Top 0.9% nationally (out of 1.2 million) in all India engineering entrance exam JEE
+                            2020</strong> - 2020<br>
+                    </li>
+
+                    <li><strong>Top 1.6% nationally (out of 1.5 million) in all India medical entrance exam NEET
+                            2019</strong> - 2019<br>
+                    </li>
+
+
+                </ul>
+            </div>
+
+            <div id="contact" class="content-section">
+                <h2 class="section-title">Contact Information</h2>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <h3>Email</h3>
+                        <p>apurba.debnath@ucsf.edu</p>
+                    </div>
+
+                    <!-- <div class="contact-item">
+                        <span class="contact-icon">🏢</span>
+                        <h3>Office</h3>
+                        <p>Computer Science Building<br>Room 304<br>University Campus</p>
+                    </div> -->
+
+                    <!-- <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div> -->
+
+                    <div class="contact-item">
+                        <span class="contact-icon">🔗</span>
+                        <h3>Links</h3>
+                        <p>
+                            <a href="#" style="color: #333;">Google Scholar</a><br>
+                            <a href="#" style="color: #333;">LinkedIn</a><br>
+                            <a href="#" style="color: #333;">ResearchGate</a>
+                        </p>
+                    </div>
+
+                    <!-- <div class="contact-item">
+                        <span class="contact-icon">🕒</span>
+                        <h3>Office Hours</h3>
+                        <p>Tuesday & Thursday<br>2:00 PM - 4:00 PM<br>Or by appointment</p>
+                    </div> -->
+
+                    <!-- <div class="contact-item">
+                        <span class="contact-icon">🎓</span>
+                        <h3>Research Lab</h3>
+                        <p>AI & ML Research Lab<br>Building B, Room 201<br>
+                            <a href="#" style="color: #333;">Lab Website</a>
+                        </p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scrolling and animation effects
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate skill tags on hover
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function () {
+                    this.style.transform = 'scale(1.1) rotate(2deg)';
+                });
+                tag.addEventListener('mouseleave', function () {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Add typing effect to the header title
+            const title = document.querySelector('.header h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let i = 0;
+
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            setTimeout(typeWriter, 1000);
+        });
+
+        function downloadCV() {
+            // Replace 'your-cv.pdf' with the actual path to your CV file
+            const link = document.createElement('a');
+            link.href = 'your-cv.pdf'; // Update this with your actual CV file path
+            link.download = 'Dr_Sarah_Johnson_CV.pdf';
+            link.click();
+        }
+
+        function loadImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const profileImg = document.getElementById('profileImage');
+                    const initials = document.getElementById('initials');
+
+                    // Hide initials and set background image
+                    initials.style.display = 'none';
+                    profileImg.style.backgroundImage = `url(${e.target.result})`;
+                    profileImg.style.backgroundSize = 'cover';
+                    profileImg.style.backgroundPosition = 'center';
+
+                    // Hide upload text
+                    document.querySelector('.upload-text').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateName() {
+            const newName = prompt("Enter your full name:", "Dr. Sarah Johnson");
+            if (newName && newName.trim() !== "") {
+                document.getElementById('nameTitle').textContent = newName;
+
+                // Update initials
+                const nameParts = newName.trim().split(' ');
+                let initials = '';
+                if (nameParts.length >= 2) {
+                    initials = nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
+                } else if (nameParts.length === 1) {
+                    initials = nameParts[0].charAt(0) + nameParts[0].charAt(1);
+                }
+                document.getElementById('initials').textContent = initials.toUpperCase();
+            }
+        }
+
+        // Add click event to name for editing
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate skill tags on hover
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function () {
+                    this.style.transform = 'scale(1.1) rotate(2deg)';
+                });
+                tag.addEventListener('mouseleave', function () {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Add typing effect to the header title
+            const title = document.querySelector('.header h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let i = 0;
+
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            setTimeout(typeWriter, 1000);
+
+            // Make name clickable for editing
+            document.getElementById('nameTitle').addEventListener('click', updateName);
+            document.getElementById('nameTitle').style.cursor = 'pointer';
+            document.getElementById('nameTitle').title = 'Click to edit name';
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
     <title>Apurba</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="favicon.ico?v=2">
@@ -66,4 +892,4 @@
 
 </body>
 
-</html>
+</html> -->
