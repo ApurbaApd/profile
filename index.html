@@ -836,6 +836,138 @@
         </div>
     </div>
 
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scrolling and animation effects
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate skill tags on hover
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function () {
+                    this.style.transform = 'scale(1.1) rotate(2deg)';
+                });
+                tag.addEventListener('mouseleave', function () {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Add typing effect to the header title
+            const title = document.querySelector('.header h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let i = 0;
+
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            setTimeout(typeWriter, 1000);
+        });
+
+        function downloadCV() {
+            // Replace 'your-cv.pdf' with the actual path to your CV file
+            const link = document.createElement('a');
+            link.href = 'your-cv.pdf'; // Update this with your actual CV file path
+            link.download = 'Dr_Sarah_Johnson_CV.pdf';
+            link.click();
+        }
+
+        function loadImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const profileImg = document.getElementById('profileImage');
+                    const initials = document.getElementById('initials');
+
+                    // Hide initials and set background image
+                    initials.style.display = 'none';
+                    profileImg.style.backgroundImage = `url(${e.target.result})`;
+                    profileImg.style.backgroundSize = 'cover';
+                    profileImg.style.backgroundPosition = 'center';
+
+                    // Hide upload text
+                    document.querySelector('.upload-text').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateName() {
+            const newName = prompt("Enter your full name:", "Dr. Sarah Johnson");
+            if (newName && newName.trim() !== "") {
+                document.getElementById('nameTitle').textContent = newName;
+
+                // Update initials
+                const nameParts = newName.trim().split(' ');
+                let initials = '';
+                if (nameParts.length >= 2) {
+                    initials = nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
+                } else if (nameParts.length === 1) {
+                    initials = nameParts[0].charAt(0) + nameParts[0].charAt(1);
+                }
+                document.getElementById('initials').textContent = initials.toUpperCase();
+            }
+        }
+
+        // Add click event to name for editing
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate skill tags on hover
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function () {
+                    this.style.transform = 'scale(1.1) rotate(2deg)';
+                });
+                tag.addEventListener('mouseleave', function () {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Add typing effect to the header title
+            const title = document.querySelector('.header h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            let i = 0;
+
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            setTimeout(typeWriter, 1000);
+
+            // Make name clickable for editing
+            document.getElementById('nameTitle').addEventListener('click', updateName);
+            document.getElementById('nameTitle').style.cursor = 'pointer';
+            document.getElementById('nameTitle').title = 'Click to edit name';
+        });
+    </script>
 </body>
 
 </html>
