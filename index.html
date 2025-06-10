@@ -75,6 +75,8 @@
             }
         }
 
+
+
         .profile-img {
             width: 300px;
             height: 300px;
@@ -207,6 +209,62 @@
             background: #666;
         }
 
+        .timeline-container {
+            position: relative;
+            margin-left: 30px;
+            padding-left: 30px;
+            border-left: 3px solid #ccc;
+        }
+
+        .research-entry {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-point {
+            position: absolute;
+            width: 500px;
+            margin-right: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .timeline-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #007BFF;
+            position: absolute;
+            left: -37px;
+            /* aligns with timeline bar */
+            top: 3px;
+        }
+
+        .timeline-date {
+            font-size: 19px;
+            font-weight: bold;
+            color: hsl(330, 86%, 49%);
+        }
+
+        .research-item {
+            flex: 1;
+        }
+
+        .item-title {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .item-meta {
+            font-style: italic;
+            color: #777777;
+        }
+
+
+
         .research-item,
         .publication-item,
         .education-item {
@@ -222,7 +280,7 @@
         .research-item:hover,
         .publication-item:hover,
         .education-item:hover {
-            background: #f0f0f0;
+            background: #10dee9;
             transform: translateX(5px);
             border-left-color: #666;
         }
@@ -308,6 +366,7 @@
         }
 
         .awards-list {
+            color: #1a1817;
             list-style: none;
         }
 
@@ -322,14 +381,15 @@
         }
 
         .awards-list li:hover {
-            background: #f0f0f0;
+            background: #58e3e8;
             transform: translateX(5px);
-            border-left-color: #666;
+            border-left-color: #1317e6;
         }
 
         .bio-text {
             font-size: 1.1rem;
-            line-height: 1.8;
+            font-family: 'Times New Roman';
+            line-height: 1.5;
             color: #444;
             text-align: justify;
         }
@@ -358,16 +418,16 @@
     <div class="container">
         <div class="portfolio-card">
             <div class="header">
-                <div class="profile-img" onclick="document.getElementById('imageInput').click();" id="profileImage">
+                <!-- <div class="profile-img" onclick="document.getElementById('imageInput').click();" id="profileImage">
                     <span id="initials">SJ</span>
                 </div>
                 <input type="file" id="imageInput" accept="image/*" onchange="loadImage(event)">
                 <div class="upload-text" onclick="document.getElementById('imageInput').click();">
                     Click to upload your photo
-                </div>
+                </div> -->
                 <h1 id="nameTitle">Apurba Debnath</h1>
-                <!-- <p class="title">Associate Professor of Computer Science</p>
-                <p class="title">Artificial Intelligence & Machine Learning Research</p> -->
+                <p class="title">Neuroscience Researcher</p>
+                <!-- <p class="title">Artificial Intelligence & Machine Learning Research</p> -->
             </div>
 
             <div class="nav-tabs">
@@ -383,13 +443,20 @@
             <div id="about" class="content-section active">
                 <h2 class="section-title">About Me</h2>
                 <p class="bio-text">
-                    I am a Masters student at University of California San Francisco (UCSF), speclializing in Biomedical
-                    Imaging technologies. Before that, I worked as a Post-Baccalaureate researcher at IIT Madars, India
-                    in the field of computational Neuroscience in BCI to understand the underlying neural mechanisms of
-                    BCI control. Subsequently as a Visting Summer researcher at Paris Brain Institute I worked in
-                    formulating interpretable deep learning tools for BCI application, there I implemented spatial
-                    filtering method to better classify the left and right motor imagery task.
+                    I am a Master's student at <b>University of California, San Francisco</b> <a
+                        href="https://www.ucsf.edu/" target="_blank">(UCSF)</a>, specializing in Biomedical Imaging
+                    technologies. Before that, I worked as a Post-Baccalaureate researcher at Indian Institute of
+                    Technology Madras, India in the
+                    field of Computational Neuroscience
+                    in BCI to understand the underlying neural mechanisms of BCI control. Subsequently, as a Visiting
+                    Summer
+                    researcher at Paris Brain Institute, I worked
+                    on formulating
+                    interpretable deep learning tools for BCI applications, where I implemented spatial filtering
+                    methods to better
+                    classify the left and right motor imagery tasks.
                 </p>
+
                 <br>
                 <p class="bio-text">
                     I hold my Bachelor's degree in Biotechnology from National Institute of Technology Durgapur, India.
@@ -406,47 +473,63 @@
             <div id="research" class="content-section">
                 <h2 class="section-title">Research Experience</h2>
 
-                <div class="research-entry">
-                    <div class="timeline">MAY 2025 – AUG 2025</div>
-                    <div class="research-item">
-                        <h3 class="item-title">Paris Brain Institute - ICM, Paris, France</h3>
-                        <p class="item-meta">Visiting Summer Researcher, Inria NERV Lab</p>
-                        <p class="item-meta">Advised by: Dr. Marie-Constance Corsi</p>
-                        <p>Developing privacy-preserving machine learning algorithms for medical data analysis across
-                            multiple hospitals without centralizing sensitive patient information. This research
-                            addresses
-                            critical challenges in healthcare AI while maintaining HIPAA compliance.</p>
+                <div class="timeline-container">
+                    <div class="research-entry">
+                        <div class="timeline-point">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">MAY 2025 – AUG 2025</div>
+                        </div>
+                        <div class="research-item">
+                            <h3 class="item-title">Paris Brain Institute - ICM, Paris, France</h3>
+                            <p class="item-meta">Visiting Summer Researcher, Inria NERV Lab</p>
+                            <p style="font-family: 'Times New Roman';">Advised by: Dr. Marie-Constance Corsi</p>
+                            <!-- <p>Developing privacy-preserving machine learning algorithms for medical data analysis
+                                across
+                                multiple hospitals without centralizing sensitive patient information. This research
+                                addresses critical challenges in healthcare AI while maintaining HIPAA compliance.</p> -->
+                        </div>
                     </div>
-                </div>
 
-                <div class="research-entry">
-                    <div class="timeline">JUL 2024 – JUL 2025</div>
-                    <div class="research-item">
-                        <h3 class="item-title">Indian Institute of Technology Madras, Chennai, India</h3>
-                        <p class="item-meta">Post-Baccalaureate Researcher, Centre for Integrative Biology and Systems
-                            Medicine (IBSE), IIT Madras</p>
-                        <p class="item-meta">Advised by: Dr. Parul Verma (IIT Madras) & Dr. Marie-Constance Corsi (Paris
-                            Brain Institute)</p>
-                        <p>Creating interpretable machine learning models for financial risk assessment and fraud
-                            detection.
-                            The goal is to develop AI systems that can provide clear explanations for their decisions to
-                            meet regulatory requirements in the financial sector.</p>
+                    <div class="research-entry">
+                        <div class="timeline-point">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">JUL 2024 – JUL 2025</div>
+                        </div>
+                        <div class="research-item">
+                            <h3 class="item-title">Indian Institute of Technology Madras, Chennai, India</h3>
+                            <p class="item-meta">Post-Baccalaureate Researcher, Centre for Integrative Biology and
+                                Systems Medicine
+                                (IBSE), IIT Madras</p>
+                            <p style="font-family: 'Times New Roman';">Advised by: Dr. Parul Verma (IIT Madras) & Dr.
+                                Marie-Constance Corsi
+                                (Paris Brain
+                                Institute)</p>
+                            <!-- <p>Creating interpretable machine learning models for financial risk assessment and fraud
+                                detection. The goal is to develop AI systems that can provide clear explanations for
+                                their decisions
+                                to
+                                meet regulatory requirements in the financial sector.</p> -->
+                        </div>
                     </div>
-                </div>
 
-                <div class="research-entry">
-                    <div class="timeline">AUG 2023 – MAY 2024</div>
-                    <div class="research-item">
-                        <h3 class="item-title">National Institute of Technology Durgapur, India</h3>
-                        <p class="item-meta">Undergraduate Researcher, Department of Biotechnology</p>
-                        <p class="item-meta">Advised by: Prof. Dalia Dasgupta Mandal</p>
-                        <p>Investigating automated neural network design techniques optimized for resource-constrained
-                            edge
-                            devices. This research aims to democratize AI deployment on IoT devices and mobile
-                            platforms.</p>
+                    <div class="research-entry">
+                        <div class="timeline-point">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">AUG 2023 – MAY 2024</div>
+                        </div>
+                        <div class="research-item">
+                            <h3 class="item-title">National Institute of Technology Durgapur, India</h3>
+                            <p class="item-meta">Undergraduate Researcher, Department of Biotechnology</p>
+                            <p style="font-family: 'Times New Roman';">Advised by: Prof. Dalia Dasgupta Mandal</p>
+                            <!-- <p>Investigating automated neural network design techniques optimized for
+                                resource-constrained
+                                edge devices. This research aims to democratize AI deployment on IoT devices and mobile
+                                platforms.</p> -->
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <div id="publications" class="content-section">
                 <h2 class="section-title">Selected Publications</h2>
@@ -499,19 +582,20 @@
                     <h3 class="item-title">University of California, San Francisco</h3>
                     <p class="item-meta">M.S. in Biomedical Imaging | 2025-2026</p>
                     <!-- <p>Concentration: Artificial Intelligence<br> -->
-                    Thesis: "Distributed Learning Algorithms for Sensor Networks"<br>
-                    GPA: 4.0/4.0</p>
+                    <!-- Thesis: "Distributed Learning Algorithms for Sensor Networks"<br>
+                    GPA: 4.0/4.0</p> -->
                 </div>
 
                 <div class="education-item">
                     <h3 class="item-title">National Institute of Technology Durgapur, India</h3>
                     <p class="item-meta">Bachelor of Technology in Biotechnology | 2020-2024</p>
-                    <!-- <p>Magna Cum Laude, Phi Beta Kappa<br> -->
-                    Thesis: "Machine Learning based approach for the design and release kinetics prediction of the
-                    PLGA-based Drug Delivery Systems"<br>
-                    Supervisor: Prof. Dalia Dasgupta Mandal<br>
-                    GPA: 3.31/4.00, Major GPA: 3.78/4.00, CS GPA: 3.93/4.00</p>
-                    <p class="item-meta">Course work:<br>
+                    <h4 style="color: rgb(128, 49, 79); font-family:'Times New Roman';">
+                        Thesis: "Machine Learning based approach for the design and release kinetics prediction of the
+                        PLGA-based Drug Delivery Systems"<br>
+                        Supervisor: Prof. Dalia Dasgupta Mandal<br>
+                        GPA: 3.31/4.00, Major GPA: 3.78/4.00, CS GPA: 3.93/4.00
+                    </h4>
+                    <p class="item-meta">Relevant Course work:<br>
                         <item><b>Biotechnology:</b> Cell Biology and Genetics, Molecular Biology and rDNA Technology,
                             Biochemistry and
                             Enzyme Technology, Human Genomics, Bioinformatics, Cancer Biology and Cell Signaling.</item>
@@ -595,29 +679,32 @@
                 <h2 class="section-title">Awards & Honors</h2>
 
                 <ul class="awards-list">
-                    <li><strong>IBSE Post-Baccalaureate Fellowship ($6000 in total)</strong> 2024-2025<br>
+                    <li><strong>IBSE Post-Baccalaureate Fellowship ($6000 in total)</strong> [2024-2025]<br>
                         "To pursue research in the filed of Computational Neuroscience to elucidate the underlying
                         neural mechanisms of Brain-Computer Interface"</li>
 
-                    <li><strong>Paris Brain Institute Travel Award for OHBM 2025, Brisbane</strong> 2025<br>
+                    <li><strong>Paris Brain Institute Travel Award for OHBM 2025, Brisbane</strong> [2025] <br>
                         "To present my research work as poster presentaion at OHBM 2025 Annual Meeting in Brisbane,
                         Australia"</li>
 
-                    <li><strong>IBSE Travel Award for Physics of Cells & Tissues 3.0 Symposium, IISc</strong> 2025<br>
+                    <li><strong>IBSE Travel Award for Physics of Cells & Tissues 3.0 Symposium, IISc</strong> [2025]
+                        <br>
                         "To present my research work as poster presentaion at Indian Institute of Science (IISc)
-                        Bengaluru, India"</li>
+                        Bengaluru, India"
+                    </li>
 
-                    <li><strong>NEC State Merit Scholarship to pursue Bachelor’s degree ($1140 in total)</strong> 2020 -
-                        2024<br>
-                        Recognized for outstanding high school score in Science stream to pursure Bachelor's degree
+                    <li><strong>NEC State Merit Scholarship to pursue Bachelor’s degree ($1140 in total)</strong> [2020
+                        -
+                        2024]<br>
+                        "Recognized for outstanding high school score in Science stream to pursure Bachelor's degree"
                     </li>
 
                     <li><strong>Top 0.9% nationally (out of 1.2 million) in all India engineering entrance exam JEE
-                            2020</strong> - 2020<br>
+                            2020</strong> [2020]<br>
                     </li>
 
                     <li><strong>Top 1.6% nationally (out of 1.5 million) in all India medical entrance exam NEET
-                            2019</strong> - 2019<br>
+                            2019</strong> [2019]<br>
                     </li>
 
 
@@ -631,7 +718,8 @@
                     <div class="contact-item">
                         <span class="contact-icon">📧</span>
                         <h3>Email</h3>
-                        <p>apurba.debnath@ucsf.edu</p>
+                        <p style="color: #1a1817;">apurba.debnath@ucsf.edu</p> or </br>
+                        <p style="color: #1a1817;">apurba.debnath.mail@gmail.com</p>
                     </div>
 
                     <!-- <div class="contact-item">
@@ -650,8 +738,11 @@
                         <span class="contact-icon">🔗</span>
                         <h3>Links</h3>
                         <p>
+                            <a href="#" style="color: #333;">CV</a><br>
                             <a href="#" style="color: #333;">Google Scholar</a><br>
-                            <a href="#" style="color: #333;">LinkedIn</a><br>
+                            <a href="https://github.com/ApurbaApd" style="color: #333;">Github</a><br>
+                            <a href="https://www.linkedin.com/in/apurba-debnath-a75a93211/"
+                                style="color: #333;">LinkedIn</a><br>
                             <a href="#" style="color: #333;">ResearchGate</a>
                         </p>
                     </div>
@@ -726,7 +817,7 @@
         });
 
         function downloadCV() {
-            // Replace 'your-cv.pdf' with the actual path to your CV file
+            // Replace 'cv.pdf' with the actual path to your CV file
             const link = document.createElement('a');
             link.href = 'your-cv.pdf'; // Update this with your actual CV file path
             link.download = 'Dr_Sarah_Johnson_CV.pdf';
@@ -755,7 +846,7 @@
         }
 
         function updateName() {
-            const newName = prompt("Enter your full name:", "Dr. Sarah Johnson");
+            const newName = prompt("Enter your full name:", "");
             if (newName && newName.trim() !== "") {
                 document.getElementById('nameTitle').textContent = newName;
 
